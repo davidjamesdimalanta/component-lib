@@ -1,4 +1,4 @@
-# Component Library
+# dd/component-lib
 
 A collection of lightweight, accessible React components built with Tailwind CSS and zero dependencies.
 

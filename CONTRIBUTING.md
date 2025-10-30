@@ -21,8 +21,8 @@ This project adheres to the Contributor Covenant [Code of Conduct](CODE_OF_CONDU
 
 2. **Clone your fork**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/component-lib.git
-   cd component-lib
+   git clone https://github.com/YOUR_USERNAME/dd-component-lib.git
+   cd dd-component-lib
    ```
 
 3. **Install dependencies**

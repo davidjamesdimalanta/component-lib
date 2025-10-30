@@ -8,7 +8,7 @@ afterEach(() => {
 });
 
 // Mock IntersectionObserver
-global.IntersectionObserver = class IntersectionObserver {
+globalThis.IntersectionObserver = class IntersectionObserver {
   constructor() {}
   disconnect() {}
   observe() {}
@@ -19,11 +19,11 @@ global.IntersectionObserver = class IntersectionObserver {
 } as unknown as typeof IntersectionObserver;
 
 // Mock requestAnimationFrame
-global.requestAnimationFrame = (cb: FrameRequestCallback) => {
+globalThis.requestAnimationFrame = (cb: FrameRequestCallback) => {
   return setTimeout(cb, 0) as unknown as number;
 };
 
-global.cancelAnimationFrame = (id: number) => {
+globalThis.cancelAnimationFrame = (id: number) => {
   clearTimeout(id);
 };
 
