@@ -36,3 +36,18 @@ build
 .env
 .env.local
 .env.production
+
+# LLM generated files
+.claude
+.claude/settings.local.json
+.claude/settings.remote.json
+.claude/settings.remote.json.backup
+.claude/settings.remote.json.backup.2
+.claude/settings.remote.json.backup.3
+.claude/settings.remote.json.backup.4
+.claude/settings.remote.json.backup.5
+.claude/settings.remote.json.backup.6
+.claude/settings.remote.json.backup.7
+.claude/settings.remote.json.backup.8
+.claude/settings.remote.json.backup.9
+.claude/settings.remote.json.backup.10
