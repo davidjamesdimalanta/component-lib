@@ -49,18 +49,14 @@ function App() {
 
           <h2>Features</h2>
           <ul>
-            <li>🪶 Zero dependencies (only React and Tailwind CSS)</li>
-            <li>
-              ♿️ Fully accessible with ARIA support and keyboard navigation
-            </li>
-            <li>
-              🎨 Two variants: circular button and horizontal progress bar
-            </li>
-            <li>⚡️ GPU-accelerated animations for smooth performance</li>
-            <li>🎯 Respects motion preferences (prefers-reduced-motion)</li>
-            <li>🌗 Dark mode support via CSS custom properties</li>
-            <li>📦 Full TypeScript support with strict typing</li>
-            <li>🔧 Configurable: page or section scroll tracking</li>
+            <li>Zero dependencies (only React and Tailwind CSS)</li>
+            <li>Fully accessible with ARIA support and keyboard navigation</li>
+            <li>Two variants: circular button and horizontal progress bar</li>
+            <li>GPU-accelerated animations for smooth performance</li>
+            <li>Respects motion preferences (prefers-reduced-motion)</li>
+            <li>Dark mode support via CSS custom properties</li>
+            <li>Full TypeScript support with strict typing</li>
+            <li>Configurable: page or section scroll tracking</li>
           </ul>
 
           <h2>How It Works</h2>

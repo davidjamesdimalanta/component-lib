@@ -1,13 +1,13 @@
 {
-  "name": "scroll-progress-button",
+  "name": "component-lib",
   "version": "0.1.0",
-  "description": "A lightweight, accessible React button component that displays scroll progress and scrolls to top. Built with Tailwind CSS and zero dependencies.",
+  "description": "A collection of lightweight, accessible React components built with Tailwind CSS and zero dependencies.",
   "type": "module",
-  "author": "",
+  "author": "David James Dimalanta",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/daviddimalanta/component-lib"
   },
   "keywords": [
     "react",

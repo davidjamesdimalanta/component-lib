@@ -1,16 +1,22 @@
-# Scroll Progress Button
+# Component Library
 
-A lightweight, accessible React button component that displays scroll progress and scrolls to top. Built with Tailwind CSS and zero dependencies.
+A collection of lightweight, accessible React components built with Tailwind CSS and zero dependencies.
+
+## Components
+
+### ScrollProgressButton
+
+A scroll-to-top button that displays scroll progress. Built with zero dependencies.
 
 ## Features
 
-- 🪶 **Zero Dependencies** - Only React and Tailwind CSS
-- ♿️ **Fully Accessible** - WCAG 2.2 AA compliant with ARIA support
-- 🎨 **Customizable** - Two variants: circular button & progress bar
-- ⚡️ **Performant** - Uses native browser APIs and GPU acceleration
-- 🌗 **Dark Mode Ready** - Built-in dark mode support
-- 📦 **TypeScript** - Full type safety
-- 🎯 **Motion Aware** - Respects prefers-reduced-motion
+- **Zero Dependencies** - Only React and Tailwind CSS
+- **Fully Accessible** - WCAG 2.2 AA compliant with ARIA support
+- **Customizable** - Two variants: circular button & progress bar
+- **Performant** - Uses native browser APIs and GPU acceleration
+- **Dark Mode Ready** - Built-in dark mode support
+- **TypeScript** - Full type safety
+- **Motion Aware** - Respects prefers-reduced-motion
 
 ## Installation
 
@@ -63,10 +69,10 @@ For comprehensive documentation, API reference, and examples, see the [component
 
 We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
+## Code of Conduct
+
+This project adheres to the Contributor Covenant [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+
 ## License
 
-MIT © [Your Name]
-
----
-
-**Built with ❤️ using React and Tailwind CSS**
+MIT © [David James Dimalanta](LICENSE)

@@ -1,4 +1,4 @@
-# Contributing to Scroll Progress Button
+# Contributing to Component Library
 
 Thank you for your interest in contributing! This document provides guidelines and instructions for contributing to this project.
 
@@ -21,8 +21,8 @@ This project adheres to the Contributor Covenant [Code of Conduct](CODE_OF_CONDU
 
 2. **Clone your fork**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/scroll-progress-button.git
-   cd scroll-progress-button
+   git clone https://github.com/YOUR_USERNAME/component-lib.git
+   cd component-lib
    ```
 
 3. **Install dependencies**
@@ -246,4 +246,4 @@ Contributors will be recognized in:
 - CHANGELOG.md for their contributions
 - GitHub contributors page
 
-Thank you for contributing! 🎉
+Thank you for contributing!

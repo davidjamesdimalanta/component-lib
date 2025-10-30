@@ -4,15 +4,15 @@ An accessible React component that displays scroll progress and scrolls to the t
 
 ## Features
 
-- 🪶 **Zero Dependencies** - Only React and Tailwind CSS required
-- ♿️ **Fully Accessible** - WCAG 2.2 AA compliant with complete ARIA support
-- 🎨 **Two Variants** - Circular button or horizontal progress bar
-- ⚡️ **High Performance** - GPU-accelerated animations with requestAnimationFrame
-- 🎯 **Motion Aware** - Respects prefers-reduced-motion user preference
-- 🌗 **Dark Mode Ready** - Built-in dark mode support via CSS variables
-- 📦 **TypeScript** - Full type safety with strict mode
-- 🔧 **Configurable** - Track page or container scroll, customizable threshold
-- 📱 **Responsive** - Works on all screen sizes and devices
+- **Zero Dependencies** - Only React and Tailwind CSS required
+- **Fully Accessible** - WCAG 2.2 AA compliant with complete ARIA support
+- **Two Variants** - Circular button or horizontal progress bar
+- **High Performance** - GPU-accelerated animations with requestAnimationFrame
+- **Motion Aware** - Respects prefers-reduced-motion user preference
+- **Dark Mode Ready** - Built-in dark mode support via CSS variables
+- **TypeScript** - Full type safety with strict mode
+- **Configurable** - Track page or container scroll, customizable threshold
+- **Responsive** - Works on all screen sizes and devices
 
 ## Installation
 
