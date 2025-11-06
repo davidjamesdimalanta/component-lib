@@ -40,7 +40,7 @@ describe('ScrollProgressButton - Scroll-Gated Mode', () => {
       expect(button).toHaveAttribute('aria-disabled', 'true');
     });
 
-    it('should have disabled styling (opacity-50, cursor-not-allowed)', () => {
+    it('should have disabled styling (disabledColor, cursor-not-allowed)', () => {
       render(
         <ScrollProgressButton
           mode="scroll-gated"
@@ -50,7 +50,7 @@ describe('ScrollProgressButton - Scroll-Gated Mode', () => {
       );
 
       const button = screen.getByRole('button');
-      expect(button.className).toContain('opacity-50');
+      expect(button.className).toContain('bg-stone-700');
       expect(button.className).toContain('cursor-not-allowed');
     });
 

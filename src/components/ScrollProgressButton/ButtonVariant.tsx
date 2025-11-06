@@ -16,6 +16,7 @@ interface ButtonVariantProps {
   buttonText?: string;
   icon?: React.ReactNode;
   buttonColor?: ColorPreset | string;
+  disabledColor?: string;
   fillColor?: string;
   position?: 'fixed' | 'inline';
 }
@@ -38,7 +39,8 @@ export const ButtonVariant: React.FC<ButtonVariantProps> = ({
   shape = 'rectangular',
   buttonText,
   icon,
-  buttonColor = 'primary',
+  buttonColor = 'bg-black',
+  disabledColor = 'bg-stone-700',
   fillColor,
   position = 'fixed',
 }) => {
@@ -46,7 +48,7 @@ export const ButtonVariant: React.FC<ButtonVariantProps> = ({
   const getButtonColorClass = (color: ColorPreset | string): string => {
     switch (color) {
       case 'dark':
-        return 'bg-gray-900 text-white';
+        return 'bg-gray-800 text-white';
       case 'primary':
         return 'bg-primary text-primary-foreground';
       case 'secondary':
@@ -67,17 +69,19 @@ export const ButtonVariant: React.FC<ButtonVariantProps> = ({
     // Default fill colors based on button color
     switch (buttonColorValue) {
       case 'dark':
-        return 'bg-gray-700';
+        return 'bg-gray-800';
       case 'primary':
         return 'bg-accent';
       case 'secondary':
         return 'bg-accent';
       default:
-        return 'bg-gray-700';
+        return 'bg-gray-800';
     }
   };
 
-  const buttonColorClass = getButtonColorClass(buttonColor);
+  const buttonColorClass = disabled
+    ? `${disabledColor} text-stone-300`
+    : getButtonColorClass(buttonColor);
   const fillColorClass = getFillColorClass(fillColor, buttonColor);
 
   // Determine size and shape classes
@@ -135,7 +139,7 @@ export const ButtonVariant: React.FC<ButtonVariantProps> = ({
         motion-reduce:transition-none
         focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring
         ${!isVisible ? 'opacity-0 pointer-events-none scale-90' : 'opacity-100 scale-100'}
-        ${disabled ? 'opacity-50 cursor-not-allowed hover:shadow-lg' : 'cursor-pointer'}
+        ${disabled ? 'cursor-not-allowed hover:shadow-lg' : 'cursor-pointer'}
         ${prefersReducedMotion ? 'motion-reduce:duration-0' : ''}
         ${className}
       `}

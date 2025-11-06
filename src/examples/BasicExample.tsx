@@ -116,7 +116,7 @@ export const TermsOfServiceExample: React.FC<TermsOfServiceExampleProps> = ({
               variant="bar"
               buttonText="Accept Terms"
               buttonColor="dark"
-              fillColor="bg-gray-700"
+              fillColor="bg-gray-800"
               container={container}
               completionThreshold={95}
             />
@@ -357,7 +357,7 @@ export const BarVariantWithIconExample: React.FC = () => {
           completionThreshold={80}
           type="button"
           buttonColor="dark"
-          fillColor="bg-gray-700"
+          fillColor="bg-gray-800"
           onScrollComplete={() => setIsComplete(true)}
           onClick={() => alert('Custom text + icon clicked!')}
           className="w-full rounded"

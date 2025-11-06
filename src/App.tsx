@@ -276,7 +276,7 @@ function App() {
           variant={variant}
           threshold={300}
           buttonColor="dark"
-          fillColor="bg-gray-700"
+          fillColor="bg-gray-800"
         />
       )}
     </div>

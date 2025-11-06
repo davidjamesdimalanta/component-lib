@@ -424,16 +424,17 @@ describe('ScrollProgressButton', () => {
       expect(progressbar).toHaveClass('py-3');
     });
 
-    it('bar variant applies buttonColor correctly', () => {
+    it('bar variant applies buttonColor correctly when enabled', () => {
       render(
         <ScrollProgressButton
           mode="scroll-gated"
           variant="bar"
           buttonColor="dark"
+          completionThreshold={0}
         />
       );
       const progressbar = screen.getByRole('progressbar');
-      expect(progressbar).toHaveClass('bg-gray-900');
+      expect(progressbar).toHaveClass('bg-gray-800');
     });
 
     it('bar variant is keyboard accessible', async () => {

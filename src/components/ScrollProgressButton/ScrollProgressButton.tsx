@@ -42,7 +42,8 @@ export const ScrollProgressButton: React.FC<ScrollProgressButtonProps> = ({
   shape,
   buttonText,
   icon,
-  buttonColor = 'primary',
+  buttonColor = 'bg-black',
+  disabledColor = 'bg-stone-700',
   fillColor,
   className,
   completionThreshold = 95,
@@ -208,6 +209,7 @@ export const ScrollProgressButton: React.FC<ScrollProgressButtonProps> = ({
         buttonText={effectiveButtonText}
         icon={icon}
         buttonColor={buttonColor}
+        disabledColor={disabledColor}
         fillColor={fillColor}
         position={container ? 'absolute' : 'fixed'}
       >
@@ -231,6 +233,7 @@ export const ScrollProgressButton: React.FC<ScrollProgressButtonProps> = ({
       buttonText={effectiveButtonText}
       icon={icon}
       buttonColor={buttonColor}
+      disabledColor={disabledColor}
       fillColor={fillColor}
       position={mode === 'scroll-gated' ? 'inline' : 'fixed'}
     >

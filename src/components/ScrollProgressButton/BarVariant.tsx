@@ -15,6 +15,7 @@ interface BarVariantProps {
   buttonText?: string;
   icon?: React.ReactNode;
   buttonColor?: ColorPreset | string;
+  disabledColor?: string;
   fillColor?: string;
   position?: 'fixed' | 'absolute';
 }
@@ -36,7 +37,8 @@ export const BarVariant: React.FC<BarVariantProps> = ({
   children,
   buttonText = 'Accept',
   icon,
-  buttonColor = 'primary',
+  buttonColor = 'bg-black',
+  disabledColor = 'bg-stone-700',
   fillColor,
   position = 'fixed',
 }) => {
@@ -50,7 +52,7 @@ export const BarVariant: React.FC<BarVariantProps> = ({
   const getButtonColorClass = (color: ColorPreset | string): string => {
     switch (color) {
       case 'dark':
-        return 'bg-gray-900 text-white';
+        return 'bg-gray-800 text-white';
       case 'primary':
         return 'bg-primary text-primary-foreground';
       case 'secondary':
@@ -71,17 +73,19 @@ export const BarVariant: React.FC<BarVariantProps> = ({
     // Default fill colors based on button color
     switch (buttonColorValue) {
       case 'dark':
-        return 'bg-gray-700';
+        return 'bg-gray-800';
       case 'primary':
         return 'bg-accent';
       case 'secondary':
         return 'bg-accent';
       default:
-        return 'bg-gray-700';
+        return 'bg-gray-800';
     }
   };
 
-  const buttonColorClass = getButtonColorClass(buttonColor);
+  const buttonColorClass = disabled
+    ? `${disabledColor} text-stone-200`
+    : getButtonColorClass(buttonColor);
   const fillColorClass = getFillColorClass(fillColor, buttonColor);
 
   // Determine content to display
@@ -118,7 +122,7 @@ export const BarVariant: React.FC<BarVariantProps> = ({
         motion-reduce:transition-none
         focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ring
         ${!isVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'}
-        ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+        ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}
         ${prefersReducedMotion ? 'motion-reduce:duration-0' : ''}
         ${className}
       `}

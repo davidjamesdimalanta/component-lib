@@ -96,17 +96,25 @@ export interface ScrollProgressButtonProps {
   icon?: React.ReactNode;
 
   /**
-   * Button background color
+   * Button background color (enabled state)
    * Accepts preset ('dark', 'primary', 'secondary') or custom Tailwind class
-   * @example 'dark' | 'bg-gray-900' | 'bg-custom-brand' | 'bg-[#1a1a1a]'
-   * @default 'primary'
+   * @example 'dark' | 'bg-gray-800' | 'bg-custom-brand' | 'bg-[#1a1a1a]'
+   * @default 'bg-black'
    */
   buttonColor?: ColorPreset | string;
 
   /**
+   * Button background color (disabled state)
+   * Accepts custom Tailwind class
+   * @example 'bg-stone-700' | 'bg-gray-300' | 'bg-[#d1d5db]'
+   * @default 'bg-stone-700'
+   */
+  disabledColor?: string;
+
+  /**
    * Progress fill color
    * Accepts preset or custom Tailwind class (same as buttonColor)
-   * @default 'bg-gray-700' for 'dark' preset, theme accent for others
+   * @default 'bg-gray-800' for 'dark' preset, theme accent for others
    */
   fillColor?: string;
 
