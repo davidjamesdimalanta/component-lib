@@ -1,10 +1,10 @@
 # ScrollProgressButton
 
-A versatile React component with two modes:
+A Scroll-Gated Button with two modes:
 1. **Scroll-gated mode** (primary): Button disabled until user scrolls through content - perfect for Terms of Service, content gates, and ensuring users read material
 2. **Scroll-to-top mode** (legacy): Traditional scroll-to-top button with progress indicator
 
-Built with zero dependencies (only React and Tailwind CSS).
+Built with React and Tailwind CSS.
 
 ## Features
 
