@@ -41,9 +41,10 @@ export const BarVariant: React.FC<BarVariantProps> = ({
   position = 'fixed',
 }) => {
   // Position classes based on position prop
-  const positionClasses = position === 'absolute'
-    ? 'absolute bottom-0 left-0 right-0'  // Bottom of container
-    : 'fixed top-0 left-0 right-0 z-50';  // Top of viewport
+  const positionClasses =
+    position === 'absolute'
+      ? 'absolute bottom-0 left-0 right-0' // Bottom of container
+      : 'fixed top-0 left-0 right-0 z-50'; // Top of viewport
 
   // Map color presets to Tailwind classes
   const getButtonColorClass = (color: ColorPreset | string): string => {
@@ -60,7 +61,10 @@ export const BarVariant: React.FC<BarVariantProps> = ({
     }
   };
 
-  const getFillColorClass = (fill: string | undefined, buttonColorValue: ColorPreset | string): string => {
+  const getFillColorClass = (
+    fill: string | undefined,
+    buttonColorValue: ColorPreset | string
+  ): string => {
     if (fill) {
       return fill.includes('bg-') ? fill : `bg-${fill}`;
     }
@@ -83,7 +87,9 @@ export const BarVariant: React.FC<BarVariantProps> = ({
   // Determine content to display
   const content = children || (
     <>
-      {icon && <span className="inline-flex items-center justify-center">{icon}</span>}
+      {icon && (
+        <span className="inline-flex items-center justify-center">{icon}</span>
+      )}
       {buttonText && <span className={icon ? 'ml-2' : ''}>{buttonText}</span>}
     </>
   );

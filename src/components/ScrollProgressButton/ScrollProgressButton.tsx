@@ -63,17 +63,21 @@ export const ScrollProgressButton: React.FC<ScrollProgressButtonProps> = ({
   }
 
   // Determine effective variant (fallback if invalid combination)
-  const effectiveVariant = mode === 'scroll-to-top' && variant === 'bar' ? 'button' : variant;
+  const effectiveVariant =
+    mode === 'scroll-to-top' && variant === 'bar' ? 'button' : variant;
 
   // Smart defaults for shape based on mode
-  const effectiveShape = shape ?? (mode === 'scroll-gated' ? 'rectangular' : 'circular');
+  const effectiveShape =
+    shape ?? (mode === 'scroll-gated' ? 'rectangular' : 'circular');
 
   // Smart default for buttonText
-  const effectiveButtonText = buttonText ?? (
-    mode === 'scroll-gated'
-      ? (effectiveVariant === 'button' ? 'Submit' : 'Accept')  // 'Accept' for bar variant
-      : undefined
-  );
+  const effectiveButtonText =
+    buttonText ??
+    (mode === 'scroll-gated'
+      ? effectiveVariant === 'button'
+        ? 'Submit'
+        : 'Accept' // 'Accept' for bar variant
+      : undefined);
   // Track scroll progress (0-100%)
   const scrollProgress = useScrollProgress(container);
 

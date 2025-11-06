@@ -184,7 +184,13 @@ describe('ScrollProgressButton - Scroll-Gated Mode', () => {
 
   describe('Variants', () => {
     it('should render button variant with circular shape in scroll-gated mode', () => {
-      render(<ScrollProgressButton mode="scroll-gated" variant="button" shape="circular" />);
+      render(
+        <ScrollProgressButton
+          mode="scroll-gated"
+          variant="button"
+          shape="circular"
+        />
+      );
 
       const button = screen.getByRole('button');
       expect(button).toHaveClass('rounded-full');

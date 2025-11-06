@@ -57,7 +57,10 @@ export const ButtonVariant: React.FC<ButtonVariantProps> = ({
     }
   };
 
-  const getFillColorClass = (fill: string | undefined, buttonColorValue: ColorPreset | string): string => {
+  const getFillColorClass = (
+    fill: string | undefined,
+    buttonColorValue: ColorPreset | string
+  ): string => {
     if (fill) {
       return fill.includes('bg-') ? fill : `bg-${fill}`;
     }
@@ -86,7 +89,9 @@ export const ButtonVariant: React.FC<ButtonVariantProps> = ({
   // Determine content to display
   const content = children || (
     <>
-      {icon && <span className="inline-flex items-center justify-center">{icon}</span>}
+      {icon && (
+        <span className="inline-flex items-center justify-center">{icon}</span>
+      )}
       {buttonText && <span className={icon ? 'ml-2' : ''}>{buttonText}</span>}
       {!icon && !buttonText && (
         // Default up-arrow icon for backward compatibility
@@ -108,9 +113,8 @@ export const ButtonVariant: React.FC<ButtonVariantProps> = ({
     </>
   );
   // Position classes based on position prop
-  const positionClasses = position === 'fixed'
-    ? 'fixed bottom-6 right-6 z-50'
-    : 'relative';
+  const positionClasses =
+    position === 'fixed' ? 'fixed bottom-6 right-6 z-50' : 'relative';
 
   return (
     <button
