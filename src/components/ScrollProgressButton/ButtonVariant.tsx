@@ -1,7 +1,7 @@
 import React from 'react';
-import type { ColorPreset } from './ScrollProgressButton.types';
+import type { ButtonShape, ColorPreset } from './ScrollProgressButton.types';
 
-interface BarVariantProps {
+interface ButtonVariantProps {
   progress: number;
   isVisible: boolean;
   prefersReducedMotion: boolean;
@@ -12,18 +12,19 @@ interface BarVariantProps {
   type?: 'submit' | 'button';
   disabled?: boolean;
   children?: React.ReactNode;
+  shape?: ButtonShape;
   buttonText?: string;
   icon?: React.ReactNode;
   buttonColor?: ColorPreset | string;
   fillColor?: string;
-  position?: 'fixed' | 'absolute';
+  position?: 'fixed' | 'inline';
 }
 
 /**
- * Horizontal bar variant for scroll progress
- * Displays as a horizontal bar with text content at the top or bottom of viewport
+ * Button variant for scroll progress
+ * Displays as a button in the bottom-right corner (circular or rectangular)
  */
-export const BarVariant: React.FC<BarVariantProps> = ({
+export const ButtonVariant: React.FC<ButtonVariantProps> = ({
   progress,
   isVisible,
   prefersReducedMotion,
@@ -34,17 +35,13 @@ export const BarVariant: React.FC<BarVariantProps> = ({
   type = 'button',
   disabled = false,
   children,
-  buttonText = 'Accept',
+  shape = 'rectangular',
+  buttonText,
   icon,
   buttonColor = 'primary',
   fillColor,
   position = 'fixed',
 }) => {
-  // Position classes based on position prop
-  const positionClasses = position === 'absolute'
-    ? 'absolute bottom-0 left-0 right-0'  // Bottom of container
-    : 'fixed top-0 left-0 right-0 z-50';  // Top of viewport
-
   // Map color presets to Tailwind classes
   const getButtonColorClass = (color: ColorPreset | string): string => {
     switch (color) {
@@ -80,13 +77,40 @@ export const BarVariant: React.FC<BarVariantProps> = ({
   const buttonColorClass = getButtonColorClass(buttonColor);
   const fillColorClass = getFillColorClass(fillColor, buttonColor);
 
+  // Determine size and shape classes
+  const isCircular = shape === 'circular';
+  const sizeClasses = isCircular
+    ? 'w-14 h-14 rounded-full'
+    : 'min-w-[11rem] min-h-[2.75rem] px-6 py-3 rounded-lg';
+
   // Determine content to display
   const content = children || (
     <>
       {icon && <span className="inline-flex items-center justify-center">{icon}</span>}
       {buttonText && <span className={icon ? 'ml-2' : ''}>{buttonText}</span>}
+      {!icon && !buttonText && (
+        // Default up-arrow icon for backward compatibility
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m18 15-6-6-6 6" />
+        </svg>
+      )}
     </>
   );
+  // Position classes based on position prop
+  const positionClasses = position === 'fixed'
+    ? 'fixed bottom-6 right-6 z-50'
+    : 'relative';
 
   return (
     <button
@@ -97,22 +121,17 @@ export const BarVariant: React.FC<BarVariantProps> = ({
       tabIndex={isVisible ? 0 : -1}
       aria-label={ariaLabel}
       aria-disabled={disabled}
-      role="progressbar"
-      aria-valuenow={Math.round(progress)}
-      aria-valuemin={0}
-      aria-valuemax={100}
       className={`
         ${positionClasses}
-        min-h-[2.75rem]
-        px-6 py-3
-        flex items-center justify-center
+        ${sizeClasses}
+        flex items-center justify-center gap-2
         ${buttonColorClass}
-        font-medium text-sm
+        shadow-lg hover:shadow-xl
         transition-all duration-300
         motion-reduce:transition-none
-        focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ring
-        ${!isVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'}
-        ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring
+        ${!isVisible ? 'opacity-0 pointer-events-none scale-90' : 'opacity-100 scale-100'}
+        ${disabled ? 'opacity-50 cursor-not-allowed hover:shadow-lg' : 'cursor-pointer'}
         ${prefersReducedMotion ? 'motion-reduce:duration-0' : ''}
         ${className}
       `}
@@ -120,15 +139,26 @@ export const BarVariant: React.FC<BarVariantProps> = ({
         transition: prefersReducedMotion ? 'none' : undefined,
       }}
     >
-      {/* Progress fill - fills from left to right behind content */}
+      {/* Progress indicator background */}
       <div
-        className={`absolute top-0 left-0 bottom-0 ${fillColorClass}`}
-        style={{
-          width: `${progress}%`,
-          transition: prefersReducedMotion ? 'none' : 'width 0.1s ease-out',
-        }}
-        aria-hidden="true"
-      />
+        className={`absolute inset-0 overflow-hidden ${isCircular ? 'rounded-full' : 'rounded-lg'}`}
+        role="progressbar"
+        aria-valuenow={Math.round(progress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Page scroll progress"
+      >
+        <div
+          className={`absolute inset-0 ${fillColorClass} origin-left`}
+          style={{
+            transform: `scaleX(${progress / 100})`,
+            transformOrigin: 'left',
+            transition: prefersReducedMotion
+              ? 'none'
+              : 'transform 0.1s ease-out',
+          }}
+        />
+      </div>
 
       {/* Button content */}
       <div className="relative z-10 flex items-center justify-center gap-2">
@@ -136,10 +166,7 @@ export const BarVariant: React.FC<BarVariantProps> = ({
       </div>
 
       {/* Screen reader only progress announcement */}
-      <span className="sr-only">
-        Scroll progress: {Math.round(progress)}%.
-        {disabled ? ' Scroll to enable.' : ' Click to continue.'}
-      </span>
+      <span className="sr-only">Scroll progress: {Math.round(progress)}%</span>
     </button>
   );
 };

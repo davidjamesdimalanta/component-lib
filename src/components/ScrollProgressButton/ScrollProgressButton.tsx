@@ -1,136 +1,237 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useScrollProgress } from './useScrollProgress';
 import { useReducedMotion } from './useReducedMotion';
-import { CircularVariant } from './CircularVariant';
+import { ButtonVariant } from './ButtonVariant';
 import { BarVariant } from './BarVariant';
 import type { ScrollProgressButtonProps } from './ScrollProgressButton.types';
 
 /**
  * ScrollProgressButton Component
  *
- * An accessible scroll-to-top button that displays scroll progress.
- * Supports two variants: circular button and horizontal progress bar.
+ * A versatile button component with two modes:
+ * 1. Scroll-gated (primary): Disabled until user scrolls through content
+ * 2. Scroll-to-top (legacy): Scrolls to top when clicked
  *
  * @description
  * - Tracks scroll position in real-time using native browser APIs
  * - Displays visual progress indicator (0-100%)
- * - Smoothly scrolls to top on click (respects motion preferences)
+ * - Scroll-gated mode: Perfect for Terms of Service, content gates
+ * - Scroll-to-top mode: Traditional back-to-top button
  * - Fully accessible with ARIA support and keyboard navigation
  * - Zero dependencies beyond React and Tailwind CSS
  *
  * @example
  * ```tsx
- * // Default circular button
- * <ScrollProgressButton />
- *
- * // Horizontal bar variant
- * <ScrollProgressButton variant="bar" />
- *
- * // Custom threshold and container
+ * // Scroll-gated form submission (primary use case)
  * <ScrollProgressButton
- *   threshold={500}
- *   container={containerRef.current}
+ *   mode="scroll-gated"
+ *   variant="button"
+ *   buttonText="Accept Terms"
+ *   buttonColor="dark"
+ *   completionThreshold={95}
+ *   onScrollComplete={() => setAgreed(true)}
  * />
+ *
+ * // Traditional scroll-to-top (legacy)
+ * <ScrollProgressButton mode="scroll-to-top" variant="button" shape="circular" />
  * ```
  */
 export const ScrollProgressButton: React.FC<ScrollProgressButtonProps> = ({
-  variant = 'circular',
+  mode = 'scroll-gated',
+  variant = 'button',
+  shape,
+  buttonText,
+  icon,
+  buttonColor = 'primary',
+  fillColor,
   className,
+  completionThreshold = 95,
   threshold = 300,
   container,
+  type,
+  disabled: manualDisabled = false,
   onClick,
+  onScrollComplete,
   children,
-  ariaLabel = 'Scroll to top of page',
+  ariaLabel,
 }) => {
+  // Validate variant for scroll-to-top mode (bar variant not allowed)
+  if (mode === 'scroll-to-top' && variant === 'bar') {
+    console.warn(
+      '[ScrollProgressButton] Bar variant is not supported in scroll-to-top mode. Falling back to button variant.'
+    );
+  }
+
+  // Determine effective variant (fallback if invalid combination)
+  const effectiveVariant = mode === 'scroll-to-top' && variant === 'bar' ? 'button' : variant;
+
+  // Smart defaults for shape based on mode
+  const effectiveShape = shape ?? (mode === 'scroll-gated' ? 'rectangular' : 'circular');
+
+  // Smart default for buttonText
+  const effectiveButtonText = buttonText ?? (
+    mode === 'scroll-gated'
+      ? (effectiveVariant === 'button' ? 'Submit' : 'Accept')  // 'Accept' for bar variant
+      : undefined
+  );
   // Track scroll progress (0-100%)
   const scrollProgress = useScrollProgress(container);
 
   // Detect motion preferences
   const prefersReducedMotion = useReducedMotion();
 
-  // Track button visibility based on threshold
-  const [isVisible, setIsVisible] = useState(false);
+  // Track scroll completion for scroll-gated mode
+  const [isScrollComplete, setIsScrollComplete] = useState(false);
 
-  // Update visibility when scroll position changes
+  // Track button visibility for scroll-to-top mode
+  const [isVisible, setIsVisible] = useState(mode === 'scroll-gated');
+
+  // Determine button type based on mode
+  const buttonType = type ?? (mode === 'scroll-gated' ? 'submit' : 'button');
+
+  // Determine default aria label based on mode
+  const defaultAriaLabel =
+    mode === 'scroll-gated' ? 'Scroll to continue' : 'Scroll to top of page';
+  const effectiveAriaLabel = ariaLabel ?? defaultAriaLabel;
+
+  // Track scroll completion in scroll-gated mode
   useEffect(() => {
-    const scrollElement = container || window;
-    const isWindow = scrollElement === window;
+    if (mode === 'scroll-gated' && !isScrollComplete) {
+      if (scrollProgress >= completionThreshold) {
+        setIsScrollComplete(true);
+        onScrollComplete?.();
+      }
+    }
+  }, [
+    mode,
+    scrollProgress,
+    completionThreshold,
+    isScrollComplete,
+    onScrollComplete,
+  ]);
 
-    const checkVisibility = () => {
-      const scrollTop = isWindow ? window.scrollY : (container?.scrollTop ?? 0);
+  // Update visibility for scroll-to-top mode
+  useEffect(() => {
+    if (mode === 'scroll-to-top') {
+      const scrollElement = container || window;
+      const isWindow = scrollElement === window;
 
-      setIsVisible(scrollTop > threshold);
-    };
+      const checkVisibility = () => {
+        const scrollTop = isWindow
+          ? window.scrollY
+          : (container?.scrollTop ?? 0);
+        setIsVisible(scrollTop > threshold);
+      };
 
-    // Initial check
-    checkVisibility();
+      // Initial check
+      checkVisibility();
 
-    // Listen for scroll events
-    scrollElement.addEventListener('scroll', checkVisibility, {
-      passive: true,
-    });
+      // Listen for scroll events
+      scrollElement.addEventListener('scroll', checkVisibility, {
+        passive: true,
+      });
 
-    return () => {
-      scrollElement.removeEventListener('scroll', checkVisibility);
-    };
-  }, [container, threshold]);
+      return () => {
+        scrollElement.removeEventListener('scroll', checkVisibility);
+      };
+    }
+  }, [mode, container, threshold]);
 
-  // Handle scroll to top
-  const handleScrollToTop = useCallback(() => {
-    // Call custom onClick if provided
-    if (onClick) {
-      onClick();
+  // Compute disabled state for scroll-gated mode
+  const isDisabled =
+    manualDisabled || (mode === 'scroll-gated' && !isScrollComplete);
+
+  // Handle click based on mode
+  const handleClick = useCallback(() => {
+    // Don't do anything if disabled
+    if (isDisabled) {
+      return;
     }
 
-    // Scroll to top with appropriate behavior
-    const behavior = prefersReducedMotion ? 'auto' : 'smooth';
-    const scrollElement = container || window;
+    // Call custom onClick handler
+    onClick?.();
 
-    if (scrollElement === window) {
-      window.scrollTo({ top: 0, behavior });
-    } else if (container) {
-      container.scrollTo({ top: 0, behavior });
+    // In scroll-to-top mode, scroll to top
+    if (mode === 'scroll-to-top') {
+      const behavior = prefersReducedMotion ? 'auto' : 'smooth';
+      const scrollElement = container || window;
+
+      if (scrollElement === window) {
+        window.scrollTo({ top: 0, behavior });
+      } else if (container) {
+        container.scrollTo({ top: 0, behavior });
+      }
     }
-  }, [container, onClick, prefersReducedMotion]);
+  }, [isDisabled, mode, onClick, prefersReducedMotion, container]);
 
   // Handle keyboard events
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+      // Space bar always needs preventDefault (buttons don't handle Space natively)
+      if (e.key === ' ') {
         e.preventDefault();
-        handleScrollToTop();
+        handleClick();
+        return;
+      }
+
+      // For Enter key: let submit buttons use native form submission
+      if (e.key === 'Enter') {
+        if (buttonType === 'submit') {
+          // Don't preventDefault - let the browser handle form submission naturally
+          // Don't call onClick here - the native button click behavior will trigger it
+        } else {
+          e.preventDefault();
+          handleClick();
+        }
       }
     },
-    [handleScrollToTop]
+    [handleClick, buttonType]
   );
 
   // Render appropriate variant
-  if (variant === 'bar') {
+  if (effectiveVariant === 'bar') {
     return (
       <BarVariant
         progress={scrollProgress}
         isVisible={isVisible}
         prefersReducedMotion={prefersReducedMotion}
         className={className}
-        ariaLabel={ariaLabel}
-        onClick={handleScrollToTop}
+        ariaLabel={effectiveAriaLabel}
+        onClick={handleClick}
         onKeyDown={handleKeyDown}
-      />
+        type={buttonType}
+        disabled={isDisabled}
+        buttonText={effectiveButtonText}
+        icon={icon}
+        buttonColor={buttonColor}
+        fillColor={fillColor}
+        position={container ? 'absolute' : 'fixed'}
+      >
+        {children}
+      </BarVariant>
     );
   }
 
   return (
-    <CircularVariant
+    <ButtonVariant
       progress={scrollProgress}
       isVisible={isVisible}
       prefersReducedMotion={prefersReducedMotion}
       className={className}
-      ariaLabel={ariaLabel}
-      onClick={handleScrollToTop}
+      ariaLabel={effectiveAriaLabel}
+      onClick={handleClick}
       onKeyDown={handleKeyDown}
+      type={buttonType}
+      disabled={isDisabled}
+      shape={effectiveShape}
+      buttonText={effectiveButtonText}
+      icon={icon}
+      buttonColor={buttonColor}
+      fillColor={fillColor}
+      position={mode === 'scroll-gated' ? 'inline' : 'fixed'}
     >
       {children}
-    </CircularVariant>
+    </ButtonVariant>
   );
 };
 

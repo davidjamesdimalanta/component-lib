@@ -8,6 +8,9 @@ export { ScrollProgressButton } from './ScrollProgressButton';
 export type {
   ScrollProgressButtonProps,
   ScrollProgressButtonVariant,
+  ScrollProgressButtonMode,
+  ButtonShape,
+  ColorPreset,
 } from './ScrollProgressButton.types';
 export { useScrollProgress } from './useScrollProgress';
 export { useReducedMotion } from './useReducedMotion';

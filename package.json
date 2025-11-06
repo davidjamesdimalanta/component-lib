@@ -1,7 +1,7 @@
 {
   "name": "dd/component-lib",
-  "version": "0.1.0",
-  "description": "A collection of lightweight, accessible React components built with Tailwind CSS and zero dependencies.",
+  "version": "0.2.0",
+  "description": "A collection of lightweight, accessible React components built with Tailwind CSS and zero dependencies. Features scroll-gated form submission buttons, scroll-to-top navigation, and more.",
   "type": "module",
   "author": "David James Dimalanta",
   "license": "MIT",
@@ -18,7 +18,13 @@
     "typescript",
     "accessibility",
     "a11y",
-    "component"
+    "component",
+    "form",
+    "submit",
+    "terms-of-service",
+    "scroll-gated",
+    "content-gate",
+    "scroll-to-top"
   ],
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
