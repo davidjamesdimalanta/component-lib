@@ -200,7 +200,7 @@ buttonColor="bg-[#1a1a1a]"   // Arbitrary value
 
 When disabled (scroll-gated mode before threshold reached):
 - Background: `bg-stone-700` (customizable via `disabledColor`)
-- Text: `text-stone-300` (button variant) or `text-stone-200` (bar variant)
+- Text: `text-stone-300` (consistent across all variants)
 - No opacity reduction - full 100% opacity with distinct colors
 - Cursor: `cursor-not-allowed`
 

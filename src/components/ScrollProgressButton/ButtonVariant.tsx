@@ -69,13 +69,13 @@ export const ButtonVariant: React.FC<ButtonVariantProps> = ({
     // Default fill colors based on button color
     switch (buttonColorValue) {
       case 'dark':
-        return 'bg-gray-800';
+        return 'bg-black';
       case 'primary':
         return 'bg-accent';
       case 'secondary':
         return 'bg-accent';
       default:
-        return 'bg-gray-800';
+        return 'bg-black';
     }
   };
 
@@ -159,11 +159,14 @@ export const ButtonVariant: React.FC<ButtonVariantProps> = ({
         <div
           className={`absolute inset-0 ${fillColorClass} origin-left`}
           style={{
-            transform: `scaleX(${progress / 100})`,
+            transform: `scaleX(${progress / 100}) translateZ(0)`,
             transformOrigin: 'left',
             transition: prefersReducedMotion
               ? 'none'
               : 'transform 0.1s ease-out',
+            willChange: prefersReducedMotion ? 'auto' : 'transform',
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
           }}
         />
       </div>

@@ -73,18 +73,18 @@ export const BarVariant: React.FC<BarVariantProps> = ({
     // Default fill colors based on button color
     switch (buttonColorValue) {
       case 'dark':
-        return 'bg-gray-800';
+        return 'bg-black';
       case 'primary':
         return 'bg-accent';
       case 'secondary':
         return 'bg-accent';
       default:
-        return 'bg-gray-800';
+        return 'bg-black';
     }
   };
 
   const buttonColorClass = disabled
-    ? `${disabledColor} text-stone-200`
+    ? `${disabledColor} text-stone-300`
     : getButtonColorClass(buttonColor);
   const fillColorClass = getFillColorClass(fillColor, buttonColor);
 
