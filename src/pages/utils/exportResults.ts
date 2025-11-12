@@ -28,19 +28,24 @@ function resultsToCSVRow(results: TestResults): CSVRow {
     control_timeMs: controlMetrics?.timeOnTaskMs ?? 0,
     control_avgSpeed: controlMetrics?.scrollMetrics.averageSpeed ?? 0,
     control_maxSpeed: controlMetrics?.scrollMetrics.maxSpeed ?? 0,
-    control_prematureClicks: controlMetrics?.interactionMetrics.prematureClicks ?? 0,
+    control_prematureClicks:
+      controlMetrics?.interactionMetrics.prematureClicks ?? 0,
     control_pauses: controlMetrics?.scrollMetrics.pauses.length ?? 0,
-    control_directionChanges: controlMetrics?.scrollMetrics.directionChanges ?? 0,
-    control_timeToClick: controlMetrics?.interactionMetrics.timeToClickAfterEnabledMs ?? 0,
+    control_directionChanges:
+      controlMetrics?.scrollMetrics.directionChanges ?? 0,
+    control_timeToClick:
+      controlMetrics?.interactionMetrics.timeToClickAfterEnabledMs ?? 0,
     // Button variant (scroll-gated)
     button_order: buttonMetrics?.order ?? 0,
     button_timeMs: buttonMetrics?.timeOnTaskMs ?? 0,
     button_avgSpeed: buttonMetrics?.scrollMetrics.averageSpeed ?? 0,
     button_maxSpeed: buttonMetrics?.scrollMetrics.maxSpeed ?? 0,
-    button_prematureClicks: buttonMetrics?.interactionMetrics.prematureClicks ?? 0,
+    button_prematureClicks:
+      buttonMetrics?.interactionMetrics.prematureClicks ?? 0,
     button_pauses: buttonMetrics?.scrollMetrics.pauses.length ?? 0,
     button_directionChanges: buttonMetrics?.scrollMetrics.directionChanges ?? 0,
-    button_timeToClick: buttonMetrics?.interactionMetrics.timeToClickAfterEnabledMs ?? 0,
+    button_timeToClick:
+      buttonMetrics?.interactionMetrics.timeToClickAfterEnabledMs ?? 0,
   };
 }
 
@@ -63,7 +68,11 @@ function csvRowToString(row: CSVRow): string {
       const stringValue = String(value);
 
       // Escape values containing commas, quotes, or newlines
-      if (stringValue.includes(',') || stringValue.includes('"') || stringValue.includes('\n')) {
+      if (
+        stringValue.includes(',') ||
+        stringValue.includes('"') ||
+        stringValue.includes('\n')
+      ) {
         return `"${stringValue.replace(/"/g, '""')}"`;
       }
 
@@ -162,20 +171,38 @@ export function logResultsToConsole(results: TestResults): void {
   console.group('📝 Intro Task');
   console.log('Name:', results.introTask.name);
   console.log('Email:', results.introTask.email);
-  console.log('Duration:', `${(results.introTask.durationMs / 1000).toFixed(2)}s`);
+  console.log(
+    'Duration:',
+    `${(results.introTask.durationMs / 1000).toFixed(2)}s`
+  );
   console.groupEnd();
 
   // Log control variant metrics
   if (results.variants.control) {
     const control = results.variants.control;
     console.group(`🔵 Control Variant (Order: ${control.order})`);
-    console.log('Time on Task:', `${(control.timeOnTaskMs / 1000).toFixed(2)}s`);
-    console.log('Avg Scroll Speed:', `${control.scrollMetrics.averageSpeed.toFixed(1)} px/s`);
-    console.log('Max Scroll Speed:', `${control.scrollMetrics.maxSpeed.toFixed(1)} px/s`);
-    console.log('Premature Clicks:', control.interactionMetrics.prematureClicks);
+    console.log(
+      'Time on Task:',
+      `${(control.timeOnTaskMs / 1000).toFixed(2)}s`
+    );
+    console.log(
+      'Avg Scroll Speed:',
+      `${control.scrollMetrics.averageSpeed.toFixed(1)} px/s`
+    );
+    console.log(
+      'Max Scroll Speed:',
+      `${control.scrollMetrics.maxSpeed.toFixed(1)} px/s`
+    );
+    console.log(
+      'Premature Clicks:',
+      control.interactionMetrics.prematureClicks
+    );
     console.log('Scroll Pauses:', control.scrollMetrics.pauses.length);
     console.log('Direction Changes:', control.scrollMetrics.directionChanges);
-    console.log('Time to Click After Enabled:', `${(control.interactionMetrics.timeToClickAfterEnabledMs / 1000).toFixed(2)}s`);
+    console.log(
+      'Time to Click After Enabled:',
+      `${(control.interactionMetrics.timeToClickAfterEnabledMs / 1000).toFixed(2)}s`
+    );
     console.groupEnd();
   }
 
@@ -184,12 +211,21 @@ export function logResultsToConsole(results: TestResults): void {
     const button = results.variants.button;
     console.group(`🟢 Button Variant (Scroll-Gated) (Order: ${button.order})`);
     console.log('Time on Task:', `${(button.timeOnTaskMs / 1000).toFixed(2)}s`);
-    console.log('Avg Scroll Speed:', `${button.scrollMetrics.averageSpeed.toFixed(1)} px/s`);
-    console.log('Max Scroll Speed:', `${button.scrollMetrics.maxSpeed.toFixed(1)} px/s`);
+    console.log(
+      'Avg Scroll Speed:',
+      `${button.scrollMetrics.averageSpeed.toFixed(1)} px/s`
+    );
+    console.log(
+      'Max Scroll Speed:',
+      `${button.scrollMetrics.maxSpeed.toFixed(1)} px/s`
+    );
     console.log('Premature Clicks:', button.interactionMetrics.prematureClicks);
     console.log('Scroll Pauses:', button.scrollMetrics.pauses.length);
     console.log('Direction Changes:', button.scrollMetrics.directionChanges);
-    console.log('Time to Click After Enabled:', `${(button.interactionMetrics.timeToClickAfterEnabledMs / 1000).toFixed(2)}s`);
+    console.log(
+      'Time to Click After Enabled:',
+      `${(button.interactionMetrics.timeToClickAfterEnabledMs / 1000).toFixed(2)}s`
+    );
     console.groupEnd();
   }
 

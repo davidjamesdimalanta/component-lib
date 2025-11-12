@@ -9,7 +9,12 @@ import { IntroTask } from './components/IntroTask';
 import { ToSTestTask } from './components/ToSTestTask';
 import { DownloadTask } from './components/DownloadTask';
 import { ResultsScreen } from './components/ResultsScreen';
-import { generateSessionId, randomizeVariantOrder, getVariantForTest, getOrderForVariant } from './utils/randomization';
+import {
+  generateSessionId,
+  randomizeVariantOrder,
+  getVariantForTest,
+  getOrderForVariant,
+} from './utils/randomization';
 import type {
   TestPhase,
   VariantOrder,
@@ -40,7 +45,9 @@ export function UserTest(): JSX.Element {
   const [introData, setIntroData] = useState<IntroTaskData | null>(null);
   const [test1Metrics, setTest1Metrics] = useState<VariantMetrics | null>(null);
   const [test2Metrics, setTest2Metrics] = useState<VariantMetrics | null>(null);
-  const [downloadData, setDownloadData] = useState<DownloadTaskData | null>(null);
+  const [downloadData, setDownloadData] = useState<DownloadTaskData | null>(
+    null
+  );
 
   // Log session initialization
   useEffect(() => {
@@ -110,7 +117,13 @@ export function UserTest(): JSX.Element {
 
   // Build final results
   const buildResults = (): TestResults | null => {
-    if (!introData || !test1Metrics || !test2Metrics || !downloadData || !testStartTimeRef.current) {
+    if (
+      !introData ||
+      !test1Metrics ||
+      !test2Metrics ||
+      !downloadData ||
+      !testStartTimeRef.current
+    ) {
       return null;
     }
 
@@ -118,8 +131,10 @@ export function UserTest(): JSX.Element {
     const totalTimeMs = endTime - testStartTimeRef.current;
 
     // Organize metrics by variant (not by order)
-    const controlMetrics = test1Metrics.variant === 'control' ? test1Metrics : test2Metrics;
-    const buttonMetrics = test1Metrics.variant === 'button' ? test1Metrics : test2Metrics;
+    const controlMetrics =
+      test1Metrics.variant === 'control' ? test1Metrics : test2Metrics;
+    const buttonMetrics =
+      test1Metrics.variant === 'button' ? test1Metrics : test2Metrics;
 
     return {
       sessionId,
@@ -146,12 +161,24 @@ export function UserTest(): JSX.Element {
 
       case 'test1': {
         const variant = getVariantForTest(variantOrder, 1);
-        return <ToSTestTask key="test1" variant={variant} onComplete={handleTest1Complete} />;
+        return (
+          <ToSTestTask
+            key="test1"
+            variant={variant}
+            onComplete={handleTest1Complete}
+          />
+        );
       }
 
       case 'test2': {
         const variant = getVariantForTest(variantOrder, 2);
-        return <ToSTestTask key="test2" variant={variant} onComplete={handleTest2Complete} />;
+        return (
+          <ToSTestTask
+            key="test2"
+            variant={variant}
+            onComplete={handleTest2Complete}
+          />
+        );
       }
 
       case 'download':
@@ -163,7 +190,9 @@ export function UserTest(): JSX.Element {
           return (
             <div className="min-h-screen flex items-center justify-center">
               <div className="text-center">
-                <p className="text-red-600 font-semibold mb-2">Error building results</p>
+                <p className="text-red-600 font-semibold mb-2">
+                  Error building results
+                </p>
                 <button
                   type="button"
                   onClick={handleRestart}
@@ -175,7 +204,14 @@ export function UserTest(): JSX.Element {
             </div>
           );
         }
-        return <ResultsScreen results={results} onRestart={handleRestart} onExportJSON={() => {}} onExportCSV={() => {}} />;
+        return (
+          <ResultsScreen
+            results={results}
+            onRestart={handleRestart}
+            onExportJSON={() => {}}
+            onExportCSV={() => {}}
+          />
+        );
       }
 
       default:

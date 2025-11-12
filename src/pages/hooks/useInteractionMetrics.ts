@@ -45,9 +45,10 @@ export function useInteractionMetrics({
       ? (clickTimeRef.current ?? Date.now()) - buttonEnabledTimeRef.current
       : 0;
 
-    const timeToClickAfterEnabledMs = buttonEnabledTimeRef.current && clickTimeRef.current
-      ? clickTimeRef.current - buttonEnabledTimeRef.current
-      : 0;
+    const timeToClickAfterEnabledMs =
+      buttonEnabledTimeRef.current && clickTimeRef.current
+        ? clickTimeRef.current - buttonEnabledTimeRef.current
+        : 0;
 
     return {
       prematureClicks: prematureClicksRef.current,

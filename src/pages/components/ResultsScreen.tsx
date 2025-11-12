@@ -5,7 +5,11 @@
 
 import { useEffect } from 'react';
 import type { ResultsScreenProps } from '../UserTest.types';
-import { exportAsJSON, exportAsCSV, logResultsToConsole } from '../utils/exportResults';
+import {
+  exportAsJSON,
+  exportAsCSV,
+  logResultsToConsole,
+} from '../utils/exportResults';
 
 /**
  * @description Results summary screen with export functionality
@@ -15,7 +19,10 @@ import { exportAsJSON, exportAsCSV, logResultsToConsole } from '../utils/exportR
  * @param onRestart - Optional callback to restart the test
  * @returns Results display component
  */
-export function ResultsScreen({ results, onRestart }: ResultsScreenProps): JSX.Element {
+export function ResultsScreen({
+  results,
+  onRestart,
+}: ResultsScreenProps): JSX.Element {
   // Log results to console on mount
   useEffect(() => {
     logResultsToConsole(results);
@@ -92,7 +99,9 @@ export function ResultsScreen({ results, onRestart }: ResultsScreenProps): JSX.E
             <div className="bg-white rounded-lg shadow-lg p-6">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-3 h-3 bg-blue-500 rounded-full" />
-                <h2 className="text-xl font-bold text-gray-900">Control (Standard Button)</h2>
+                <h2 className="text-xl font-bold text-gray-900">
+                  Control (Standard Button)
+                </h2>
               </div>
               <div className="text-sm text-gray-600 mb-4">
                 Tested {controlMetrics.order === 1 ? 'first' : 'second'}
@@ -144,7 +153,9 @@ export function ResultsScreen({ results, onRestart }: ResultsScreenProps): JSX.E
             <div className="bg-white rounded-lg shadow-lg p-6">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-3 h-3 bg-green-500 rounded-full" />
-                <h2 className="text-xl font-bold text-gray-900">Button (Scroll-Gated)</h2>
+                <h2 className="text-xl font-bold text-gray-900">
+                  Button (Scroll-Gated)
+                </h2>
               </div>
               <div className="text-sm text-gray-600 mb-4">
                 Tested {buttonMetrics.order === 1 ? 'first' : 'second'}
@@ -198,8 +209,8 @@ export function ResultsScreen({ results, onRestart }: ResultsScreenProps): JSX.E
             Export Your Data
           </h2>
           <p className="text-gray-600 mb-6">
-            Download your complete test results for further analysis. Results have also been
-            logged to the browser console (press F12 to view).
+            Download your complete test results for further analysis. Results
+            have also been logged to the browser console (press F12 to view).
           </p>
 
           <div className="flex flex-wrap gap-4 mb-6">
@@ -230,8 +241,9 @@ export function ResultsScreen({ results, onRestart }: ResultsScreenProps): JSX.E
 
           <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-sm text-blue-900">
-              <strong>Note:</strong> Your data has been logged to the console. Open Developer
-              Tools (F12 or Cmd+Option+I) and check the Console tab to see detailed metrics.
+              <strong>Note:</strong> Your data has been logged to the console.
+              Open Developer Tools (F12 or Cmd+Option+I) and check the Console
+              tab to see detailed metrics.
             </p>
           </div>
         </div>

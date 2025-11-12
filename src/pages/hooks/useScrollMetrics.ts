@@ -4,7 +4,12 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import type { ScrollMetrics, ScrollSpeedSample, ScrollPause, ScrollMilestones } from '../UserTest.types';
+import type {
+  ScrollMetrics,
+  ScrollSpeedSample,
+  ScrollPause,
+  ScrollMilestones,
+} from '../UserTest.types';
 
 interface UseScrollMetricsOptions {
   containerRef: React.RefObject<HTMLElement>;
@@ -57,9 +62,10 @@ export function useScrollMetrics({
       .map((s) => s.pixelsPerSecond)
       .filter((speed) => Number.isFinite(speed) && speed > 0);
 
-    const averageSpeed = speeds.length > 0
-      ? speeds.reduce((sum, speed) => sum + speed, 0) / speeds.length
-      : 0;
+    const averageSpeed =
+      speeds.length > 0
+        ? speeds.reduce((sum, speed) => sum + speed, 0) / speeds.length
+        : 0;
     const maxSpeed = speeds.length > 0 ? Math.max(...speeds) : 0;
 
     return {
@@ -113,7 +119,11 @@ export function useScrollMetrics({
     };
 
     // Detect and record pause
-    const recordPauseIfNeeded = (speed: number, timestamp: number, position: number): void => {
+    const recordPauseIfNeeded = (
+      speed: number,
+      timestamp: number,
+      position: number
+    ): void => {
       if (speed < PAUSE_THRESHOLD_PX_PER_S) {
         // Potentially in a pause
         if (!pauseStartRef.current) {
@@ -125,7 +135,8 @@ export function useScrollMetrics({
           const duration = timestamp - pauseStartRef.current.time;
           if (duration >= PAUSE_MIN_DURATION_MS) {
             pausesRef.current.push({
-              timestamp: pauseStartRef.current.time - (startTimeRef.current ?? 0),
+              timestamp:
+                pauseStartRef.current.time - (startTimeRef.current ?? 0),
               durationMs: duration,
               position: pauseStartRef.current.position,
             });
@@ -143,7 +154,8 @@ export function useScrollMetrics({
 
       // Record first scroll
       if (!firstScrollTimeRef.current && currentPosition > 0) {
-        firstScrollTimeRef.current = timestamp - (startTimeRef.current ?? timestamp);
+        firstScrollTimeRef.current =
+          timestamp - (startTimeRef.current ?? timestamp);
       }
 
       // Update max depth
@@ -179,7 +191,10 @@ export function useScrollMetrics({
 
         // Detect direction change
         const currentDirection = positionDelta >= 0 ? 'down' : 'up';
-        if (currentDirection !== lastDirectionRef.current && Math.abs(positionDelta) > 5) {
+        if (
+          currentDirection !== lastDirectionRef.current &&
+          Math.abs(positionDelta) > 5
+        ) {
           directionChangesRef.current++;
           lastDirectionRef.current = currentDirection;
         }

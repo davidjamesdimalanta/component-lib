@@ -17,7 +17,11 @@ export function IntroTask({ onComplete }: IntroTaskProps): JSX.Element {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const [errors, setErrors] = useState<{ name?: string; email?: string; terms?: string }>({});
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    terms?: string;
+  }>({});
 
   const startTimeRef = useRef<number>(Date.now());
 
@@ -106,7 +110,10 @@ export function IntroTask({ onComplete }: IntroTaskProps): JSX.Element {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name field */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Full Name
             </label>
             <input
@@ -122,7 +129,11 @@ export function IntroTask({ onComplete }: IntroTaskProps): JSX.Element {
               aria-describedby={errors.name ? 'name-error' : undefined}
             />
             {errors.name && (
-              <p id="name-error" className="mt-1 text-sm text-red-600" role="alert">
+              <p
+                id="name-error"
+                className="mt-1 text-sm text-red-600"
+                role="alert"
+              >
                 {errors.name}
               </p>
             )}
@@ -130,7 +141,10 @@ export function IntroTask({ onComplete }: IntroTaskProps): JSX.Element {
 
           {/* Email field */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Email Address
             </label>
             <input
@@ -146,7 +160,11 @@ export function IntroTask({ onComplete }: IntroTaskProps): JSX.Element {
               aria-describedby={errors.email ? 'email-error' : undefined}
             />
             {errors.email && (
-              <p id="email-error" className="mt-1 text-sm text-red-600" role="alert">
+              <p
+                id="email-error"
+                className="mt-1 text-sm text-red-600"
+                role="alert"
+              >
                 {errors.email}
               </p>
             )}
@@ -167,12 +185,17 @@ export function IntroTask({ onComplete }: IntroTaskProps): JSX.Element {
                 aria-describedby={errors.terms ? 'terms-error' : undefined}
               />
               <label htmlFor="terms" className="ml-3 text-sm text-gray-700">
-                I agree to receive communications about this app and understand that I will need
-                to review the full Terms of Service before downloading.
+                I agree to receive communications about this app and understand
+                that I will need to review the full Terms of Service before
+                downloading.
               </label>
             </div>
             {errors.terms && (
-              <p id="terms-error" className="mt-1 text-sm text-red-600" role="alert">
+              <p
+                id="terms-error"
+                className="mt-1 text-sm text-red-600"
+                role="alert"
+              >
                 {errors.terms}
               </p>
             )}
@@ -188,7 +211,8 @@ export function IntroTask({ onComplete }: IntroTaskProps): JSX.Element {
         </form>
 
         <p className="mt-6 text-xs text-center text-gray-500">
-          Your information is used for research purposes only and will not be shared.
+          Your information is used for research purposes only and will not be
+          shared.
         </p>
       </div>
     </div>

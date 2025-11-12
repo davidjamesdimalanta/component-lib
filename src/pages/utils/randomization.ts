@@ -16,7 +16,9 @@ export function generateSessionId(): string {
   }
 
   // Fallback for older browsers (not cryptographically secure)
-  console.warn('[randomization] crypto.randomUUID not available, using fallback');
+  console.warn(
+    '[randomization] crypto.randomUUID not available, using fallback'
+  );
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
     const r = (Math.random() * 16) | 0;
     const v = c === 'x' ? r : (r & 0x3) | 0x8;

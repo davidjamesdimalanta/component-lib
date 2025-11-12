@@ -12,7 +12,10 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/components/ScrollProgressButton/index.ts'),
+      entry: path.resolve(
+        __dirname,
+        'src/components/ScrollProgressButton/index.ts'
+      ),
       name: 'ScrollProgressButton',
       formats: ['es', 'cjs'],
       fileName: (format) => `scroll-progress-button.${format}.js`,

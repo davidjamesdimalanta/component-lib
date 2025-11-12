@@ -37,7 +37,9 @@ function App() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-bold">Scroll Progress Button Demo</h1>
+              <h1 className="text-2xl font-bold">
+                Scroll Progress Button Demo
+              </h1>
               <button
                 onClick={() => setSelectedExample(null)}
                 className="px-4 py-2 rounded-md text-sm bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors"
@@ -56,7 +58,8 @@ function App() {
             <section className="mb-8 text-center">
               <h2 className="text-3xl font-bold mb-4">Choose an Example</h2>
               <p className="text-muted-foreground">
-                Select an example below to see the ScrollProgressButton in action
+                Select an example below to see the ScrollProgressButton in
+                action
               </p>
             </section>
 
@@ -71,7 +74,8 @@ function App() {
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
                   Complete A/B test comparing control button vs. progress bar.
-                  Includes metrics tracking, console logging, and data export (JSON/CSV).
+                  Includes metrics tracking, console logging, and data export
+                  (JSON/CSV).
                 </p>
                 <button
                   onClick={() => setSelectedExample('user-test')}
@@ -83,9 +87,7 @@ function App() {
 
               {/* Scroll-Gated Examples */}
               <div className="border rounded-lg p-6 bg-card hover:border-primary transition-colors">
-                <h3 className="text-xl font-semibold mb-2">
-                  Terms of Service
-                </h3>
+                <h3 className="text-xl font-semibold mb-2">Terms of Service</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Button disabled until user scrolls through ToS content
                 </p>
@@ -167,7 +169,8 @@ function App() {
                   </span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Automatic reduced motion support with live preference detection
+                  Automatic reduced motion support with live preference
+                  detection
                 </p>
                 <button
                   onClick={() => setSelectedExample('reduced-motion')}

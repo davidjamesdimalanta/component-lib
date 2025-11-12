@@ -32,7 +32,10 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps): JSX.Element {
             </h2>
             <ol className="list-decimal list-inside space-y-2">
               <li>Fill out a brief sign-up form for an Apple app</li>
-              <li>Review and accept Terms of Service (twice, using different interfaces)</li>
+              <li>
+                Review and accept Terms of Service (twice, using different
+                interfaces)
+              </li>
               <li>Complete the app download process</li>
             </ol>
             <p className="mt-3 text-sm text-gray-600">
@@ -45,9 +48,10 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps): JSX.Element {
               What We're Testing
             </h2>
             <p>
-              We're comparing two different ways of presenting Terms of Service agreements
-              to understand which provides a better user experience. You'll complete the same
-              task twice with different interface designs.
+              We're comparing two different ways of presenting Terms of Service
+              agreements to understand which provides a better user experience.
+              You'll complete the same task twice with different interface
+              designs.
             </p>
           </section>
 
@@ -56,8 +60,13 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps): JSX.Element {
               Privacy & Data Collection
             </h2>
             <ul className="list-disc list-inside space-y-2">
-              <li>Your interactions will be recorded (scroll behavior, clicks, timing)</li>
-              <li>Data is anonymous and identified only by a random session ID</li>
+              <li>
+                Your interactions will be recorded (scroll behavior, clicks,
+                timing)
+              </li>
+              <li>
+                Data is anonymous and identified only by a random session ID
+              </li>
               <li>Results will be shown to you at the end</li>
               <li>You can download your data as JSON or CSV files</li>
               <li>No personal information is shared or stored permanently</li>
@@ -79,9 +88,9 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps): JSX.Element {
         <div className="border-t border-gray-200 pt-6">
           <div className="bg-blue-50 border border-blue-200 rounded-md p-4 mb-6">
             <p className="text-sm text-blue-900">
-              <strong>By clicking "I Agree, Start Test"</strong> you consent to participate
-              in this study and understand that your interactions will be recorded for
-              research purposes.
+              <strong>By clicking "I Agree, Start Test"</strong> you consent to
+              participate in this study and understand that your interactions
+              will be recorded for research purposes.
             </p>
           </div>
 

@@ -4,7 +4,12 @@
  */
 
 import { useRef } from 'react';
-import type { VariantMetrics, ButtonVariant, ScrollMetrics, InteractionMetrics } from '../UserTest.types';
+import type {
+  VariantMetrics,
+  ButtonVariant,
+  ScrollMetrics,
+  InteractionMetrics,
+} from '../UserTest.types';
 import { useScrollMetrics } from './useScrollMetrics';
 import { useInteractionMetrics } from './useInteractionMetrics';
 
@@ -59,10 +64,7 @@ export function useMetricsTracker({
   });
 
   // Track button interactions
-  const {
-    metrics: interactionMetrics,
-    recordClick,
-  } = useInteractionMetrics({
+  const { metrics: interactionMetrics, recordClick } = useInteractionMetrics({
     buttonRef,
     buttonEnabled,
     enabled,
