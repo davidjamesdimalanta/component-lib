@@ -11,6 +11,7 @@ import {
   CustomOnClickExample,
   ReducedMotionExample,
 } from './examples/BasicExample';
+import { UserTest } from './pages/UserTest';
 
 type ExampleType =
   | 'terms-of-service'
@@ -22,7 +23,8 @@ type ExampleType =
   | 'bar-scroll-to-top'
   | 'custom-container'
   | 'custom-onclick'
-  | 'reduced-motion';
+  | 'reduced-motion'
+  | 'user-test';
 
 function App() {
   const [selectedExample, setSelectedExample] = useState<ExampleType | null>(
@@ -59,6 +61,26 @@ function App() {
             </section>
 
             <div className="grid gap-4 md:grid-cols-2">
+              {/* User Testing - Featured */}
+              <div className="md:col-span-2 border-2 border-purple-500 rounded-lg p-6 bg-gradient-to-r from-purple-50 to-blue-50 hover:border-purple-600 transition-colors">
+                <div className="flex items-center gap-2 mb-2">
+                  <h3 className="text-xl font-semibold">A/B User Testing</h3>
+                  <span className="px-2 py-1 text-xs rounded-full bg-purple-500 text-white">
+                    Research
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Complete A/B test comparing control button vs. progress bar.
+                  Includes metrics tracking, console logging, and data export (JSON/CSV).
+                </p>
+                <button
+                  onClick={() => setSelectedExample('user-test')}
+                  className="w-full px-4 py-2 rounded-md bg-purple-600 text-white hover:bg-purple-700"
+                >
+                  Start User Test
+                </button>
+              </div>
+
               {/* Scroll-Gated Examples */}
               <div className="border rounded-lg p-6 bg-card hover:border-primary transition-colors">
                 <h3 className="text-xl font-semibold mb-2">
@@ -249,6 +271,8 @@ function App() {
           <CustomContainerExample />
         ) : selectedExample === 'custom-onclick' ? (
           <CustomOnClickExample />
+        ) : selectedExample === 'user-test' ? (
+          <UserTest />
         ) : null}
       </main>
     </div>
